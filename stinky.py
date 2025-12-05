@@ -3,8 +3,10 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
+import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+print("diddyblud")
 data = pd.read_csv("classifcation_and_seqs_aln.csv")
 data = data.dropna()
 
@@ -41,13 +43,12 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.20, random_state=42
 )
 num_classes = len(np.unique(y))
-lr = 0.00004
+lr = 0.000003
 
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(1670, activation='relu', input_shape=[max_len]),
-    tf.keras.layers.Dense(1410, activation='relu'),
-    tf.keras.layers.Dense(670, activation="relu"),
-    tf.keras.layers.Dense(410, activation="relu"),
+    tf.keras.layers.Dense(41, activation='relu', input_shape=[max_len]),
+    tf.keras.layers.Dense(41, activation='relu'),
+    tf.keras.layers.Dense(34),
     tf.keras.layers.Softmax()
 ])
 
@@ -59,9 +60,9 @@ model.compile(
 )
 
 
-eeffoc = 50
+eeffoc = 525
 
-history = model.fit(X_train, y_train, epochs=eeffoc, validation_split=0.4)
+history = model.fit(X_train, y_train, epochs=eeffoc, validation_data=(X_test, y_test))
 
 
 
@@ -72,10 +73,6 @@ df = pd.DataFrame(history.history)['loss']
 
 epochs = range(len(df))
 loss = df
-import plotly.express as px
-
-df = pd.DataFrame(history.history)['loss']
-
 
 
 test_loss, test_accuracy = model.evaluate(X_test, y_test) 
