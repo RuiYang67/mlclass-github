@@ -6,7 +6,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 print("diddyblud")
-data = pd.read_csv("classifcation_and_seqs_aln.csv")
+data = pd.read_csv("all_classifcation_and_seqs_aln.csv")
 data = data.dropna()
 
 
@@ -47,7 +47,7 @@ lr = 0.000003
 model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(41, activation='relu', input_shape=[max_len]),
     tf.keras.layers.Dense(41, activation='relu'),
-    tf.keras.layers.Dense(34),
+    tf.keras.layers.Dense(67),
     tf.keras.layers.Softmax()
 ])
 
